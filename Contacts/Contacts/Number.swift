@@ -15,11 +15,11 @@ enum NumberType {
 }
 
 class Number {
-    var numberString: String
+    var numberString: String?
     var numberType: NumberType
     unowned var contact: Contact
     
-    init?(numberString: String, contact: Contact, numberType: NumberType = .mobile) {
+    init?(numberString: String? = "", contact: Contact, numberType: NumberType = .mobile) {
         guard numberString != "" else {
             return nil
         }
@@ -31,6 +31,6 @@ class Number {
 
 extension Number: CustomStringConvertible {
     var description: String {
-        return numberString
+        return numberString!
     }
 }

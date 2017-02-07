@@ -9,11 +9,11 @@
 import UIKit
 
 class Contact {
-    var firstName: String
-    var lastName: String
+    var firstName: String?
+    var lastName: String?
     var numbers: [Number]
     
-    init(firstName: String, lastName: String) {
+    init(firstName: String? = "", lastName: String? = "") {
         self.firstName = firstName
         self.lastName = lastName
         numbers = [Number]()
@@ -22,6 +22,6 @@ class Contact {
 
 extension Contact: CustomStringConvertible {
     var description: String {
-        return [firstName, lastName].joined(separator: " ")
+        return [firstName!, lastName!].joined(separator: " ")
     }
 }

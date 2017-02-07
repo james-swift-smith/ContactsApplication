@@ -18,6 +18,7 @@
 		0C7854AF1E49D1C3002C47BC /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */; };
 		0C7854B11E49D238002C47BC /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */; };
 		0C7854B71E4A197D002C47BC /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */; };
+		0C7854B91E4A1F15002C47BC /* NewContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B81E4A1F15002C47BC /* NewContactTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
+		0C7854B81E4A1F15002C47BC /* NewContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */,
 				0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */,
 				0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */,
+				0C7854B81E4A1F15002C47BC /* NewContactTableViewController.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				0C7854AB1E49044F002C47BC /* Number.swift in Sources */,
 				0C7854A91E490395002C47BC /* Contact.swift in Sources */,
 				0C7854AF1E49D1C3002C47BC /* ContactsTableViewController.swift in Sources */,
+				0C7854B91E4A1F15002C47BC /* NewContactTableViewController.swift in Sources */,
 				0C7854991E48FE7D002C47BC /* ViewController.swift in Sources */,
 				0C7854B11E49D238002C47BC /* ContactTableViewCell.swift in Sources */,
 				0C7854AD1E49C5CF002C47BC /* Database.swift in Sources */,

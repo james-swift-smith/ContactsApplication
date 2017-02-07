@@ -15,6 +15,14 @@ class ContactsTableViewController: UITableViewController {
     }
     
     @IBAction func newContactViewControllerDone(segue: UIStoryboardSegue) {
+        if let newContactViewController = segue.source as? NewContactTableViewController {
+            if let contact = newContactViewController.contact {
+                Database.sharedInstance.contacts.append(contact)
+                
+                let indexPath = IndexPath(row: Database.sharedInstance.contacts.count - 1, section: 0)
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        }
         
     }
     
@@ -87,30 +95,4 @@ class ContactsTableViewController: UITableViewController {
             break
         }
     }
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
