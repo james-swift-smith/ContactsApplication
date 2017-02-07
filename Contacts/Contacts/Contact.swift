@@ -11,12 +11,12 @@ import UIKit
 class Contact {
     var firstName: String
     var lastName: String
-    var number: [Number]
+    var numbers: [Number]
     
     init(firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName
-        number = [Number]()
+        numbers = [Number]()
     }
 }
 

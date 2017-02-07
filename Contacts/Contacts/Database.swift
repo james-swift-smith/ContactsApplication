@@ -47,7 +47,7 @@ class Database {
             
             let contact = Contact(firstName: firstName, lastName: lastName)
             if let number = Number(numberString: numberString, contact: contact) {
-                contact.number.append(number)
+                contact.numbers.append(number)
                 return contact
             }
             

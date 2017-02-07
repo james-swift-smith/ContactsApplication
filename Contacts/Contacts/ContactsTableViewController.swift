@@ -10,6 +10,14 @@ import UIKit
 
 class ContactsTableViewController: UITableViewController {
     
+    @IBAction func newContactViewControllerCencel(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func newContactViewControllerDone(segue: UIStoryboardSegue) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,7 +50,6 @@ class ContactsTableViewController: UITableViewController {
         return Database.sharedInstance.contacts.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
 
@@ -50,8 +57,6 @@ class ContactsTableViewController: UITableViewController {
         cell.contact = contact
         return cell
     }
-    
-
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -68,6 +73,21 @@ class ContactsTableViewController: UITableViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        switch identifier {
+        case "showContactDetailsSegue":
+            let contactTableViewCell = sender as! ContactTableViewCell
+            let detailsViewController = segue.destination as! ContactDetailsViewController
+            detailsViewController.contact = contactTableViewCell.contact
+        default:
+            break
+        }
+    }
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
