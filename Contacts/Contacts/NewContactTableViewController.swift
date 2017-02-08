@@ -8,32 +8,33 @@
 
 import UIKit
 
-class NewContactTableViewController: UITableViewController, UITextFieldDelegate {
+class NewContactTableViewController: UITableViewController{
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
+    @IBAction func firstNameTextiFieldEditingChanged(_ sender: UITextField) {
+        if (firstNameTextField.text?.isEmpty)! {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+        else {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+    }
     
+    
+    @IBAction func phoneNumberTextFieldEditingChanged(_ sender: UITextField) {
+        phoneNumberTextField.keyboardType = .phonePad
+    }
     
     
     var contact: Contact?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        firstNameTextField.delegate = self
-        lastNameTextField.delegate = self
-        
-        if (firstNameTextField.text?.isEmpty)! {
-            // Disable DONE button here!
-        }
-        
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Enable DONE button here!
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     override func didReceiveMemoryWarning() {
