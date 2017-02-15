@@ -22,13 +22,7 @@ class NewContactTableViewController: UITableViewController{
         else {
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
-    }
-    
-    
-    @IBAction func phoneNumberTextFieldEditingChanged(_ sender: UITextField) {
-        phoneNumberTextField.keyboardType = .phonePad
-    }
-    
+    }    
     
     var contact: Contact?
     
@@ -48,6 +42,16 @@ class NewContactTableViewController: UITableViewController{
             if let number = Number(numberString: phoneNumberTextField.text!, contact: contact!) {
                 contact?.numbers.append(number)
             }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 && indexPath.row == 1 {
+            print("HERE!")
         }
     }
 }
