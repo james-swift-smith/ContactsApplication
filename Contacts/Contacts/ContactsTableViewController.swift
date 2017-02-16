@@ -10,20 +10,20 @@ import UIKit
 
 class ContactsTableViewController: UITableViewController {
     
-    @IBAction func newContactViewControllerCencel(segue: UIStoryboardSegue) {
+    @IBAction func handleAddContactCancelButtonAction(segue: UIStoryboardSegue) {
         
     }
     
-    @IBAction func newContactViewControllerDone(segue: UIStoryboardSegue) {
-        if let newContactViewController = segue.source as? NewContactTableViewController {
-            if let contact = newContactViewController.contact {
+    @IBAction func handleAddContactDoneButtonAction(segue: UIStoryboardSegue) {
+        if let addContactViewController = segue.source as? AddContactTableViewController {
+            if let contact = addContactViewController.contact {
                 Database.sharedInstance.contacts.append(contact)
                 
                 let indexPath = IndexPath(row: Database.sharedInstance.contacts.count - 1, section: 0)
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
         }
-        
+
     }
     
     override func viewDidLoad() {

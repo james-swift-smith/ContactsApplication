@@ -44,14 +44,7 @@ class Database {
          ("Albertina", "Landy", "0065478204"),
          ("Efren", "Earle", "0089647390") ].map {
             (firstName, lastName, numberString) -> Contact in
-            
-            let contact = Contact(firstName: firstName, lastName: lastName)
-            if let number = Number(numberString: numberString, contact: contact) {
-                contact.numbers.append(number)
-                return contact
-            }
-            
-            return contact
+            return Contact(firstName: firstName, lastName: lastName, number: Number(numberString: numberString)!)
     }
 }
 

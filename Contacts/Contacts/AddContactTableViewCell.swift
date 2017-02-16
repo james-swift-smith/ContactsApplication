@@ -1,0 +1,36 @@
+//
+//  AddContactTableViewCell.swift
+//  Contacts
+//
+//  Created by Taras Motyl on 2/16/17.
+//  Copyright © 2017 James Smith. All rights reserved.
+//
+
+import UIKit
+
+class AddContactTableViewCell: UITableViewCell {    
+    @IBOutlet weak var customTextField: UITextField?
+    var addContactTableDelegate: AddContactTableViewController?
+    var isFirstNameFiled: Bool?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+    @IBAction func customTextFiledEditingChanged(_ sender: AnyObject) {
+        addContactTableDelegate?.handleDoneButtonState(textFiled: (customTextField?.text?.isEmpty)!)
+        
+        if isFirstNameFiled! == true {
+            addContactTableDelegate?.firstName = (customTextField?.text)!
+        } else {
+            addContactTableDelegate?.lastName = (customTextField?.text)!
+        }
+    }
+}

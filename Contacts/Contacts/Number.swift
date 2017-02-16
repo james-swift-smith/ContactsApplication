@@ -17,14 +17,12 @@ enum NumberType {
 class Number {
     var numberString: String?
     var numberType: NumberType
-    unowned var contact: Contact
     
-    init?(numberString: String? = "", contact: Contact, numberType: NumberType = .mobile) {
-        guard numberString != "" else {
+    init?(numberString: String?, numberType: NumberType = .mobile) {
+        guard numberString != nil else {
             return nil
         }
         self.numberString = numberString
-        self.contact = contact
         self.numberType = numberType
     }
 }

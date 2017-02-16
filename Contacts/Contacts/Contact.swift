@@ -9,22 +9,47 @@
 import UIKit
 
 class Contact {
-    var firstName: String
+    var firstName: String?
     var lastName: String?
     var numbers: [Number]
     
-    init(firstName: String, lastName: String?) {
-        self.firstName = firstName
-        self.lastName = lastName
+    init?(firstName: String?, lastName: String?) {
+        if firstName == nil && lastName == nil {
+            return nil
+        }
+        if let firstName = firstName {
+            self.firstName = firstName
+        }
+        if let lastName = lastName {
+            self.lastName = lastName
+        }
         numbers = [Number]()
+    }
+    
+    init(firstName: String?, lastName: String?, number: Number) {
+        if let firstName = firstName {
+            self.firstName = firstName
+        }
+        if let lastName = lastName {
+            self.lastName = lastName
+        }
+        numbers = [Number]()
+        numbers.append(number)
     }
 }
 
 extension Contact: CustomStringConvertible {
     var description: String {
-        guard lastName != nil else {
-            return firstName
+        var fullName = [String]()
+        if let firstName = firstName {
+            fullName.append(firstName)
         }
-        return [firstName, lastName!].joined(separator: " ")
+        if let lastName = lastName {
+            fullName.append(lastName)
+        }
+        if !numbers.isEmpty && fullName.isEmpty {
+            fullName.append(numbers.first!.description)
+        }
+        return fullName.joined(separator: " ")
     }
 }
