@@ -1,39 +1,27 @@
 //
-//  AddContactTableViewController.swift
+//  AddNumberTableViewController.swift
 //  Contacts
 //
-//  Created by James Smith on 2/16/17.
+//  Created by Taras Motyl on 2/16/17.
 //  Copyright © 2017 James Smith. All rights reserved.
 //
 
 import UIKit
 
-struct Section {
-    let name: String
-    var rows: Int
-    let cellReuseIdentifier: String
-    var header: String?
-}
-
-struct SegueInfo {
-    let name: String
-}
-
-class AddContactTableViewController: UITableViewController {
-
-    var contact: Contact?
-    var firstName: String?
-    var lastName: String?
-    var phoneNumbers: [Number]?
-    //var tableStructure: TableStructure?
+class AddNumberTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     var sections: [Section]?
-    var doneSegue = SegueInfo(name: "HandleAddContactDoneButton")
+    var phoneNumberTypePicker: UIPickerView?
+    var phoneTypes: [String]?
+    var doneSegue = SegueInfo(name: "HandleAddNumberDoneButton")
+    
+    var phoneNumber: String?
+    var phoneNumberType: NumberType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem?.isEnabled = false
-        
-        sections = [Section(name: "Name", rows: 2, cellReuseIdentifier: "AddContactCell", header: "Personal Information"), Section(name: "Number", rows: 1, cellReuseIdentifier: "AddNumberCell", header: "Number")]
+        sections = [Section(name: "Phone number", rows: 1, cellReuseIdentifier: "PhoneNumberCell", header: nil), Section(name: "Phone type", rows: 1, cellReuseIdentifier: "PhoneNumberTypeCell", header: "Phone Type")]
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -45,7 +33,7 @@ class AddContactTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     func handleDoneButtonState(textFiled isEmpty: Bool) {
         if isEmpty {
             navigationItem.rightBarButtonItem?.isEnabled = false
@@ -53,20 +41,8 @@ class AddContactTableViewController: UITableViewController {
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
-    
-    func configureCellCustomTextField(forRow row: Int) -> (placeholderText: String, isFirstNameField: Bool) {
-        var placeholder: String
-        var isFitstName: Bool
-        if row == 0 {
-            placeholder = "First name"
-            isFitstName = true
-        } else {
-            placeholder = "Last name"
-            isFitstName = false
-        }
-        
-        return (placeholder, isFitstName)
-    }
+
+    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return (sections?.count)!
@@ -76,21 +52,32 @@ class AddContactTableViewController: UITableViewController {
         return (sections?[section].rows)!
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = (tableView.dequeueReusableCell(withIdentifier: (sections?[0].cellReuseIdentifier)!, for: indexPath) as? AddContactTableViewCell)!
-            let cellCustomTextFieldConfig = configureCellCustomTextField(forRow: indexPath.row)
-        
-            cell.addContactTableDelegate = self
-            cell.customTextField?.font = UIFont(name: "System", size: 17)
-            cell.customTextField?.placeholder = cellCustomTextFieldConfig.placeholderText
-            cell.isFirstNameFiled = cellCustomTextFieldConfig.isFirstNameField
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: (sections?[0].cellReuseIdentifier)!, for: indexPath) as! AddNumberTableViewCell
+            cell.addNumberTableDelegate = self
+            //cell.phoneNumberTextField.becomeFirstResponder()
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: (sections?[1].cellReuseIdentifier)!, for: indexPath)
+            
+            phoneNumberTypePicker = UIPickerView(frame: CGRect(x: cell.contentView.frame.origin.x, y: cell.contentView.frame.origin.y, width: cell.contentView.frame.width, height: cell.contentView.frame.height))
+            // Set the dataSource and Delegate for this picker to be the Controller
+            phoneNumberTypePicker?.dataSource = self
+            phoneNumberTypePicker?.delegate = self
+            phoneNumberTypePicker?.showsSelectionIndicator = true
+            
+            cell.contentView.addSubview(phoneNumberTypePicker!)
+            cell.contentView.bringSubview(toFront: phoneNumberTypePicker!)
             return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 44
+        } else {
+            return 88
         }
     }
     
@@ -101,27 +88,32 @@ class AddContactTableViewController: UITableViewController {
             return sections?[1].header
         }
     }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return NumberType.allValues.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        phoneTypes = [String]()
 
+        for value in NumberType.allValues {
+            phoneTypes?.append(value.rawValue)
+        }
+        return phoneTypes?[row]
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == doneSegue.name {
             view.endEditing(true)
-            contact = Contact(firstName: firstName, lastName: lastName)
+            let currentPnoneType = phoneNumberTypePicker?.selectedRow(inComponent: 0)
+            phoneNumberType = NumberType(id: currentPnoneType!)
         }
     }
-    
-    @IBAction func handleAddNumberCancelButtonAction(segue: UIStoryboardSegue) {
-        
-    }
-    
-    @IBAction func handleAddNumberDoneButtonAction(segue: UIStoryboardSegue) {
-        if let addNumberViewController = segue.source as? AddNumberTableViewController {
-            let number = Number(numberString: addNumberViewController.phoneNumber, numberType: addNumberViewController.phoneNumberType!)
-            phoneNumbers?.append(number!)
-            print("number: \(number!.numberString)")
-            print("type: \(number!.numberType)")
-        }
-    }
-    
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -156,15 +148,4 @@ class AddContactTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

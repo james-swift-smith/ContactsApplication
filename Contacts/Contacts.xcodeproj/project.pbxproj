@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C48D0DF1E5649520082D805 /* AddNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C48D0DE1E5649520082D805 /* AddNumberTableViewCell.swift */; };
 		0C7854971E48FE7D002C47BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854961E48FE7D002C47BC /* AppDelegate.swift */; };
 		0C7854991E48FE7D002C47BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854981E48FE7D002C47BC /* ViewController.swift */; };
 		0C78549C1E48FE7D002C47BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C78549A1E48FE7D002C47BC /* Main.storyboard */; };
@@ -18,10 +19,13 @@
 		0C7854AF1E49D1C3002C47BC /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */; };
 		0C7854B11E49D238002C47BC /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */; };
 		0C7854B71E4A197D002C47BC /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */; };
-		0C7854B91E4A1F15002C47BC /* NewContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B81E4A1F15002C47BC /* NewContactTableViewController.swift */; };
+		0C9DDB4C1E55E5B7004C7B12 /* AddContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DDB4B1E55E5B7004C7B12 /* AddContactTableViewController.swift */; };
+		0C9DDB501E55EFB1004C7B12 /* AddContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DDB4F1E55EFB1004C7B12 /* AddContactTableViewCell.swift */; };
+		0C9DDB541E5632E8004C7B12 /* AddNumberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DDB531E5632E8004C7B12 /* AddNumberTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C48D0DE1E5649520082D805 /* AddNumberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNumberTableViewCell.swift; sourceTree = "<group>"; };
 		0C7854931E48FE7D002C47BC /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C7854961E48FE7D002C47BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C7854981E48FE7D002C47BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,7 +39,9 @@
 		0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
-		0C7854B81E4A1F15002C47BC /* NewContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactTableViewController.swift; sourceTree = "<group>"; };
+		0C9DDB4B1E55E5B7004C7B12 /* AddContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactTableViewController.swift; sourceTree = "<group>"; };
+		0C9DDB4F1E55EFB1004C7B12 /* AddContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactTableViewCell.swift; sourceTree = "<group>"; };
+		0C9DDB531E5632E8004C7B12 /* AddNumberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNumberTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +86,10 @@
 				0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */,
 				0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */,
 				0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */,
-				0C7854B81E4A1F15002C47BC /* NewContactTableViewController.swift */,
+				0C9DDB4B1E55E5B7004C7B12 /* AddContactTableViewController.swift */,
+				0C9DDB4F1E55EFB1004C7B12 /* AddContactTableViewCell.swift */,
+				0C9DDB531E5632E8004C7B12 /* AddNumberTableViewController.swift */,
+				0C48D0DE1E5649520082D805 /* AddNumberTableViewCell.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -157,15 +166,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C9DDB501E55EFB1004C7B12 /* AddContactTableViewCell.swift in Sources */,
 				0C7854AB1E49044F002C47BC /* Number.swift in Sources */,
+				0C9DDB541E5632E8004C7B12 /* AddNumberTableViewController.swift in Sources */,
 				0C7854A91E490395002C47BC /* Contact.swift in Sources */,
 				0C7854AF1E49D1C3002C47BC /* ContactsTableViewController.swift in Sources */,
-				0C7854B91E4A1F15002C47BC /* NewContactTableViewController.swift in Sources */,
 				0C7854991E48FE7D002C47BC /* ViewController.swift in Sources */,
 				0C7854B11E49D238002C47BC /* ContactTableViewCell.swift in Sources */,
 				0C7854AD1E49C5CF002C47BC /* Database.swift in Sources */,
+				0C48D0DF1E5649520082D805 /* AddNumberTableViewCell.swift in Sources */,
 				0C7854B71E4A197D002C47BC /* ContactDetailsViewController.swift in Sources */,
 				0C7854971E48FE7D002C47BC /* AppDelegate.swift in Sources */,
+				0C9DDB4C1E55E5B7004C7B12 /* AddContactTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +339,7 @@
 				0C7854A71E48FE7D002C47BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,10 +8,25 @@
 
 import Foundation
 
-enum NumberType {
+enum NumberType: String {
     case mobile
-    case work
     case home
+    case work
+    
+    static let allValues = [mobile, home, work]
+    
+    init?(id : Int) {
+        switch id {
+        case 0:
+            self = .mobile
+        case 1:
+            self = .home
+        case 2:
+            self = .work
+        default:
+            return nil
+        }
+    }
 }
 
 class Number {
