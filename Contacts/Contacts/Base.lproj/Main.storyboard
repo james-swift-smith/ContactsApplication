@@ -20,11 +20,11 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ivw-as-xjH" id="MfQ-7T-ag8">
-                                    <frame key="frameInset" width="342" height="43.5"/>
+                                    <frame key="frameInset" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Full name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c2n-lf-0uG">
-                                            <frame key="frameInset" minX="15" width="325" height="43.5"/>
+                                            <frame key="frameInset" minX="15" width="325" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -134,7 +134,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DMz-Qe-Qyt" id="qix-lm-9w6">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oLd-RD-O6O">
@@ -157,15 +157,60 @@
                                     <outlet property="customTextField" destination="oLd-RD-O6O" id="wKf-Nf-wQr"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AddNumberCell" textLabel="oOm-gA-sIh" style="IBUITableViewCellStyleDefault" id="YUV-vG-we4" customClass="AddContactTableViewCell" customModule="Contacts" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddPhoneWithTypeCell" id="yn3-Sn-QQ4" customClass="AddPhoneWithTypeTableViewCell" customModule="Contacts" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="164" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yn3-Sn-QQ4" id="xyY-wy-w87">
+                                    <frame key="frameInset" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hbt-NK-0dR">
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyv-Yl-4b6">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" backgroundImage="disclosure_indicator_small_1"/>
+                                                    <connections>
+                                                        <action selector="phoneTypeButtonTouchedDown:" destination="yn3-Sn-QQ4" eventType="touchDown" id="j3v-JC-t8L"/>
+                                                        <segue destination="xrj-yd-ohS" kind="presentation" identifier="SelectPhoneType" id="if3-Gk-INC"/>
+                                                    </connections>
+                                                </button>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="srJ-J8-Krp">
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                    <connections>
+                                                        <action selector="phoneNumberTextFieldEditingDidChanged:" destination="yn3-Sn-QQ4" eventType="editingChanged" id="fbJ-6S-8Ze"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="srJ-J8-Krp" firstAttribute="leading" secondItem="fyv-Yl-4b6" secondAttribute="trailing" constant="8" id="gzo-gH-0qz"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hbt-NK-0dR" secondAttribute="bottom" id="4Lp-yb-1hs"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hbt-NK-0dR" secondAttribute="trailing" id="FtE-t4-XmM"/>
+                                        <constraint firstItem="hbt-NK-0dR" firstAttribute="leading" secondItem="xyY-wy-w87" secondAttribute="leadingMargin" id="Gu5-i7-hPF"/>
+                                        <constraint firstItem="hbt-NK-0dR" firstAttribute="top" secondItem="xyY-wy-w87" secondAttribute="topMargin" id="SrR-2Z-P8x"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="fyv-Yl-4b6" secondAttribute="leading" id="W5v-QV-62G"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="fyv-Yl-4b6" secondAttribute="trailing" constant="240" id="sVj-q2-Ioi"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="phoneNumberTextField" destination="srJ-J8-Krp" id="6sx-XW-NhB"/>
+                                    <outlet property="phoneTypeButton" destination="fyv-Yl-4b6" id="QC2-wC-4sJ"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddNumberCell" textLabel="oOm-gA-sIh" style="IBUITableViewCellStyleDefault" id="YUV-vG-we4">
+                                <rect key="frame" x="0.0" y="208" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YUV-vG-we4" id="H57-bP-f7n">
-                                    <frame key="frameInset" width="342" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oOm-gA-sIh">
-                                            <frame key="frameInset" minX="15" width="325" height="43.5"/>
+                                            <frame key="frameInset" minX="15" width="345" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -173,9 +218,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="o95-J7-PGD" kind="show" id="TFW-D5-1kI"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -199,84 +241,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H81-l2-auz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="TTO-Mb-mb4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1895" y="645"/>
+            <point key="canvasLocation" x="1893.5999999999999" y="644.52773613193403"/>
         </scene>
-        <!--Add Number-->
-        <scene sceneID="ntn-Nc-Lmr">
+        <!--Phone Type-->
+        <scene sceneID="M0w-ug-RYd">
             <objects>
-                <tableViewController title="Add Number" id="o95-J7-PGD" customClass="AddNumberTableViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="SKH-qP-3U6">
+                <tableViewController id="1Nb-2d-scH" customClass="PhoneTypeTableViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Paa-Ti-4kI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PhoneNumberCell" id="x8m-sW-hSx" customClass="AddNumberTableViewCell" customModule="Contacts" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhoneTypeCell" textLabel="bgI-c6-5lM" style="IBUITableViewCellStyleDefault" id="xaH-G2-rgF">
                                 <rect key="frame" x="0.0" y="120" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x8m-sW-hSx" id="e6x-VV-bea">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xaH-G2-rgF" id="WQn-Ac-2qb">
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pbI-ke-Mt9">
-                                            <nil key="textColor"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bgI-c6-5lM">
+                                            <frame key="frameInset" minX="15" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                                            <connections>
-                                                <action selector="phoneNumberTextFieldEdtitingChanged:" destination="x8m-sW-hSx" eventType="editingChanged" id="kXj-7m-0yn"/>
-                                            </connections>
-                                        </textField>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="pbI-ke-Mt9" firstAttribute="leading" secondItem="e6x-VV-bea" secondAttribute="leadingMargin" constant="8" id="Xdq-QM-Vmb"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="pbI-ke-Mt9" secondAttribute="bottom" constant="-1" id="Z5O-qJ-sAO"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="pbI-ke-Mt9" secondAttribute="trailing" id="vAI-B2-Wu3"/>
-                                        <constraint firstItem="pbI-ke-Mt9" firstAttribute="top" secondItem="e6x-VV-bea" secondAttribute="topMargin" constant="-2" id="ysC-jL-dCJ"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="phoneNumberTextField" destination="pbI-ke-Mt9" id="TsF-dX-msg"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PhoneNumberTypeCell" rowHeight="88" id="7jc-iS-zda">
-                                <rect key="frame" x="0.0" y="164" width="375" height="88"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7jc-iS-zda" id="5aI-3V-YDL">
-                                    <frame key="frameInset" width="375" height="87.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59F-NU-FQc"/>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="59F-NU-FQc" firstAttribute="top" secondItem="5aI-3V-YDL" secondAttribute="topMargin" id="8cr-mM-ZV3"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="59F-NU-FQc" secondAttribute="trailing" id="A0e-jq-9ND"/>
-                                        <constraint firstItem="59F-NU-FQc" firstAttribute="leading" secondItem="5aI-3V-YDL" secondAttribute="leadingMargin" id="DbR-xZ-9oK"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="59F-NU-FQc" secondAttribute="bottom" id="saM-4c-jcA"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="o95-J7-PGD" id="sjJ-9e-YWp"/>
-                            <outlet property="delegate" destination="o95-J7-PGD" id="Bf3-6v-uNh"/>
+                            <outlet property="dataSource" destination="1Nb-2d-scH" id="tbx-Jn-I6r"/>
+                            <outlet property="delegate" destination="1Nb-2d-scH" id="JkP-0t-SQh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Number" id="kBW-hf-rv7">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YIv-GU-Ecx">
+                    <navigationItem key="navigationItem" title="Phone Type" id="jIj-Pg-5LW">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2nu-K3-2Zw">
                             <connections>
-                                <segue destination="4cU-2l-6hn" kind="unwind" unwindAction="handleAddNumberCancelButtonActionWithSegue:" id="Plz-qo-nTW"/>
+                                <segue destination="lco-KC-Hat" kind="unwind" identifier="HandlePhoneTypeCancelButtonSegue" unwindAction="handlePhoneTypeCancelButtonActionWithSegue:" id="ihQ-rK-4y4"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="MiY-6a-D7V">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="1ir-qL-AuP">
                             <connections>
-                                <segue destination="4cU-2l-6hn" kind="unwind" identifier="HandleAddNumberDoneButton" unwindAction="handleAddNumberDoneButtonActionWithSegue:" id="HVv-ur-thI"/>
+                                <segue destination="lco-KC-Hat" kind="unwind" identifier="HandlePhoneTypeDoneButtonSegue" unwindAction="handlePhoneTypeDoneButtonActionWithSegue:" id="Bdv-kJ-ch7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rjx-nz-utD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="4cU-2l-6hn" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XUa-L9-QDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="lco-KC-Hat" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2954" y="645"/>
+            <point key="canvasLocation" x="3664.8000000000002" y="644.52773613193403"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MJ6-1x-STn">
@@ -314,5 +329,26 @@
             </objects>
             <point key="canvasLocation" x="948" y="645"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cnj-Co-e9p">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xrj-yd-ohS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YZa-DO-ch9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Nb-2d-scH" kind="relationship" relationship="rootViewController" id="lVq-wP-wQr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fYU-Mt-Fve" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2725.5999999999999" y="644.52773613193403"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="disclosure_indicator_small_1" width="132" height="27"/>
+    </resources>
 </document>

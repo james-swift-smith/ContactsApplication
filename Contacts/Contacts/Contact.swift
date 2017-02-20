@@ -36,6 +36,16 @@ class Contact {
         numbers = [Number]()
         numbers.append(number)
     }
+    
+    init(firstName: String?, lastName: String?, numbers: [Number]) {
+        if let firstName = firstName {
+            self.firstName = firstName
+        }
+        if let lastName = lastName {
+            self.lastName = lastName
+        }
+        self.numbers = numbers
+    }
 }
 
 extension Contact: CustomStringConvertible {
