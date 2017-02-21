@@ -48,6 +48,9 @@ class AddPhoneWithTypeTableViewCell: UITableViewCell {
     }
     
     func composeNumber() -> Number? {
+        if (phoneNumberTextField.text?.isEmpty)! {
+            return nil
+        }
         return Number(numberString: phoneNumberTextField.text, numberType: NumberType(rawValue: phoneTypeButton.currentTitle!)!)
     }
 }

@@ -62,11 +62,7 @@ class AddContactTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return sections[0].header
-        } else {
-            return sections[1].header
-        }
+        return sections[section].header
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

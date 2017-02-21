@@ -87,10 +87,10 @@ class ContactsTableViewController: UITableViewController {
         }
         
         switch identifier {
-        case "showContactDetailsSegue":
+        case "ShowContactDetailsSegue":
             let contactTableViewCell = sender as! ContactTableViewCell
-            let detailsViewController = segue.destination as! ContactDetailsViewController
-            detailsViewController.contact = contactTableViewCell.contact
+            let contactDetailsViewController = segue.destination as! ContactDetailsTableViewController
+            contactDetailsViewController.contact = contactTableViewCell.contact
         default:
             break
         }
