@@ -34,6 +34,11 @@ class AddPhoneWithTypeTableViewCell: UITableViewCell {
     @IBAction func phoneTypeButtonTouchedDown(_ sender: UIButton) {
         addContactTableViewControllerDelegate?.indexOfCurrentlyEditingPhoneType = IndexPath(row: sender.tag, section: 1)
     }
+    
+    func setPnoneNumberTextFieldText(text: String) {
+        phoneNumberTextField.text = text
+    }
+    
     func setPhoneTypeButtonTitle(phoneType type: String) {
         phoneTypeButton.setTitle(type, for: .normal)
         pType = type

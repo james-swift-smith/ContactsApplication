@@ -14,6 +14,8 @@ class ContactDetailsTableViewController: UITableViewController {
     var personalInfo: [String]!
     var sections: [Section]!
     
+    var editSegue = SegueInfo(name: "HandleEditButtonActionSegue")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         personalInfo = [String]()
@@ -39,7 +41,6 @@ class ContactDetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if !personalInfo.isEmpty {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: sections[0].cellReuseIdentifier[0], for: indexPath)
@@ -70,18 +71,35 @@ class ContactDetailsTableViewController: UITableViewController {
         }
         
         if !contact.numbers.isEmpty  {
-            sections.append(Section(name: "Phone Numbers", rows: contact.numbers.count, cellReuseIdentifier: ["ContactNumberCell"], header: "Phone Numbers"))
+            var header: String
+            if contact.numbers.count > 1 {
+                header = "Phone Numbers"
+            } else {
+                header = "Phone Number"
+            }
+            sections.append(Section(name: "Phone Numbers", rows: contact.numbers.count, cellReuseIdentifier: ["ContactNumberCell"], header: header))
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        switch identifier {
+        case editSegue.name:
+            if let navigationController = segue.destination as? UINavigationController {
+                if let addContactTableViewController = navigationController.topViewController as? AddContactTableViewController {
+                    addContactTableViewController.addContactSegue = false
+                    addContactTableViewController.contact = contact
+                }
+            }
+        default:
+            break
+        }
 
+    }
 }

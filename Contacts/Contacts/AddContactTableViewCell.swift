@@ -30,4 +30,8 @@ class AddContactTableViewCell: UITableViewCell {
             addContactTableDelegate?.lastName = (customTextField?.text)!
         }
     }
+    
+    func setCustomTextFieldText(text: String) {
+        customTextField?.text = text
+    }
 }

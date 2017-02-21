@@ -10,6 +10,9 @@ import UIKit
 
 class ContactsTableViewController: UITableViewController {
     
+    var contactDetailsSegue = SegueInfo(name: "ShowContactDetailsSegue")
+    var addContactSegue = SegueInfo(name: "AddContactSegue")
+    
     @IBAction func handleAddContactCancelButtonAction(segue: UIStoryboardSegue) {
         
     }
@@ -87,10 +90,16 @@ class ContactsTableViewController: UITableViewController {
         }
         
         switch identifier {
-        case "ShowContactDetailsSegue":
+        case contactDetailsSegue.name:
             let contactTableViewCell = sender as! ContactTableViewCell
             let contactDetailsViewController = segue.destination as! ContactDetailsTableViewController
             contactDetailsViewController.contact = contactTableViewCell.contact
+        case addContactSegue.name:
+            if let navigationController = segue.destination as? UINavigationController {
+                if let addContactTableViewController = navigationController.topViewController as? AddContactTableViewController {
+                    addContactTableViewController.addContactSegue = true
+                }
+            }
         default:
             break
         }
