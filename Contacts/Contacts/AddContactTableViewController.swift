@@ -34,9 +34,18 @@ class AddContactTableViewController: UITableViewController {
     var doneSegue = SegueInfo(name: "HandleAddContactDoneButton")
     var cancelSegue = SegueInfo(name: "HandleAddContactCancelButton")
     var selectPhoneTypeSegue = SegueInfo(name: "SelectPhoneType")
+    
+    var editDoneSegue = SegueInfo(name: "HandleEditContactDoneButtonActionSegue")
+    var editCancelSegue = SegueInfo(name: "HandleEditContactCancelButtonActionSegue")
+    
     var addContactSegue: Bool?
+    var addNewNumberInEditMode: Bool?
     
     var indexOfCurrentlyEditingPhoneType: IndexPath?
+    
+    var textFields: [UITextField]?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +59,7 @@ class AddContactTableViewController: UITableViewController {
         tableView.allowsSelectionDuringEditing = true
         
         phoneNumbers = [Number]()
+        textFields = [UITextField]()
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,30 +81,6 @@ class AddContactTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*if indexPath.section == 0 {
-            let cell = (tableView.dequeueReusableCell(withIdentifier: sections[0].cellReuseIdentifier[0], for: indexPath) as? AddContactTableViewCell)!
-            let cellCustomTextFieldConfig = configureCellCustomTextField(forRow: indexPath.row)
-        
-            cell.addContactTableDelegate = self
-            cell.customTextField?.placeholder = cellCustomTextFieldConfig.placeholderText
-            cell.isFirstNameFiled = cellCustomTextFieldConfig.isFirstNameField
-            
-            return cell
-        } else {
-            if indexPath.row == (sections?[1].rows)! - 1 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: sections[1].cellReuseIdentifier[0], for: indexPath)
-                return cell
-            } else {
-                let cell = (tableView.dequeueReusableCell(withIdentifier: sections[1].cellReuseIdentifier[1], for: indexPath) as? AddPhoneWithTypeTableViewCell)!
-                    
-                cell.addContactTableViewControllerDelegate = self
-                cell.setPhoneTypeButtonTitle(phoneType: NumberType.mobile.rawValue)
-                cell.setButtonTag(tag: indexPath.row)
-                
-                return cell
-            }
-        }*/
-        
         if addContactSegue! {
             return constructCellForAddingContact(cellForRowAt: indexPath)
         } else {
@@ -102,26 +88,43 @@ class AddContactTableViewController: UITableViewController {
         }
     }
     
+    func constructPersonalInfoCell(cellForRowAt indexPath: IndexPath) -> AddContactTableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[0], for: indexPath) as? AddContactTableViewCell)!
+        let cellCustomTextFieldConfig = configureCellCustomTextField(forRow: indexPath.row)
+        cell.isFirstNameFiled = cellCustomTextFieldConfig.isFirstNameField
+        cell.addContactTableViewControllerDelegate = self
+        cell.registerTextField()
+        return cell
+    }
+    
+    func constructPhoneNumberCell(cellForRowAt indexPath: IndexPath) -> AddPhoneWithTypeTableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[1], for: indexPath) as? AddPhoneWithTypeTableViewCell)!
+        
+        cell.addContactTableViewControllerDelegate = self
+        cell.setButtonTag(tag: indexPath.row)
+        cell.registerTextField()
+        return cell
+    }
+    
+    func constructAddPhoneNumberCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[0], for: indexPath)
+        return cell
+    }
+    
     func constructCellForAddingContact(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = (tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[0], for: indexPath) as? AddContactTableViewCell)!
+            let cell = constructPersonalInfoCell(cellForRowAt: indexPath)
             let cellCustomTextFieldConfig = configureCellCustomTextField(forRow: indexPath.row)
-            
-            cell.addContactTableDelegate = self
             cell.customTextField?.placeholder = cellCustomTextFieldConfig.placeholderText
-            cell.isFirstNameFiled = cellCustomTextFieldConfig.isFirstNameField
             
             return cell
+            
         } else {
             if indexPath.row == (sections?[indexPath.section].rows)! - 1 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[0], for: indexPath)
-                return cell
+                return constructAddPhoneNumberCell(cellForRowAt: indexPath)
             } else {
-                let cell = (tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[1], for: indexPath) as? AddPhoneWithTypeTableViewCell)!
-                
-                cell.addContactTableViewControllerDelegate = self
+                let cell = constructPhoneNumberCell(cellForRowAt: indexPath)
                 cell.setPhoneTypeButtonTitle(phoneType: NumberType.mobile.rawValue)
-                cell.setButtonTag(tag: indexPath.row)
                 
                 return cell
             }
@@ -131,28 +134,25 @@ class AddContactTableViewController: UITableViewController {
     func constructCellForEditingContact(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if !personalInfo.isEmpty {
             if indexPath.section == 0 {
-                let cell = (tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[0], for: indexPath)
-                    as? AddContactTableViewCell)!
-                let cellCustomTextFieldConfig = configureCellCustomTextField(forRow: indexPath.row)
-                
-                cell.addContactTableDelegate = self
-                cell.isFirstNameFiled = cellCustomTextFieldConfig.isFirstNameField
+                let cell = constructPersonalInfoCell(cellForRowAt: indexPath)
                 cell.setCustomTextFieldText(text: personalInfo[indexPath.row])
                 
                 return cell
+                
             }
         }
         if indexPath.row == (sections?[indexPath.section].rows)! - 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[0], for: indexPath)
-            return cell
+            return constructAddPhoneNumberCell(cellForRowAt: indexPath)
         } else {
-            let cell = (tableView.dequeueReusableCell(withIdentifier: sections[indexPath.section].cellReuseIdentifier[1], for: indexPath) as? AddPhoneWithTypeTableViewCell)!
-            
-            cell.addContactTableViewControllerDelegate = self
-            cell.setPhoneTypeButtonTitle(phoneType: NumberType.mobile.rawValue)
-            cell.setButtonTag(tag: indexPath.row)
-            cell.setPnoneNumberTextFieldText(text: (contact?.numbers[indexPath.row].numberString)!)
-            cell.setPhoneTypeButtonTitle(phoneType: (contact?.numbers[indexPath.row].numberType.rawValue)!)
+            let cell = constructPhoneNumberCell(cellForRowAt: indexPath)
+            if let addNewNumberInEditMode = addNewNumberInEditMode {
+                if addNewNumberInEditMode {
+                    cell.setPhoneTypeButtonTitle(phoneType: NumberType.mobile.rawValue)
+                }
+            } else {
+                cell.setPnoneNumberTextFieldText(text: (contact?.numbers[indexPath.row].numberString)!)
+                cell.setPhoneTypeButtonTitle(phoneType: (contact?.numbers[indexPath.row].numberType.rawValue)!)
+            }
             
             return cell
         }
@@ -179,9 +179,11 @@ class AddContactTableViewController: UITableViewController {
         if let contact = contact {
             if let firstName = contact.firstName {
                 personalInfo.append(firstName)
+                self.firstName = firstName
             }
             if let lastName = contact.lastName {
                 personalInfo.append(lastName)
+                self.lastName = lastName
             }
             
             if !personalInfo.isEmpty {
@@ -221,6 +223,7 @@ class AddContactTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Increment number of rows in Number Section and insert new row
+            addNewNumberInEditMode = addContactSegue! ? false : true
             sections[1].rows += 1
             let indexForNewRow = IndexPath(row: tableView.numberOfRows(inSection: 1) - 1, section: 1)
             tableView.insertRows(at: [indexForNewRow], with: .automatic)
@@ -228,11 +231,12 @@ class AddContactTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 && indexPath.row == sections[1].rows - 1 {
-            sections[1].rows += 1
-            let indexForNewRow = IndexPath(row: tableView.numberOfRows(inSection: 1) - 1, section: 1)
+        if indexPath.section == 1 && indexPath.row == sections[indexPath.section].rows - 1 {
+            addNewNumberInEditMode = addContactSegue! ? false : true
+            sections[indexPath.section].rows += 1
+            let indexForNewRow = IndexPath(row: tableView.numberOfRows(inSection: indexPath.section) - 1, section: indexPath.section)
             tableView.insertRows(at: [indexForNewRow], with: .automatic)
-            let indexForAddRow = IndexPath(row: sections[1].rows - 1, section: 1)
+            let indexForAddRow = IndexPath(row: sections[indexPath.section].rows - 1, section: indexPath.section)
             tableView.deselectRow(at: indexForAddRow, animated: true)
         }
     }
@@ -251,6 +255,19 @@ class AddContactTableViewController: UITableViewController {
     
     // MARK: Navigation
     
+    func watchOverAllTextFields() {
+        print("in watchOverAllTextFields")
+        print("textfields count: \(textFields?.count)")
+        
+        var allEmpty = true
+        for textField in textFields! {
+            if !(textField.text?.isEmpty)! {
+                allEmpty = false
+            }
+        }
+        handleDoneButtonState(textFiled: allEmpty)
+    }
+    
     func handleDoneButtonState(textFiled isEmpty: Bool) {
         if isEmpty {
             navigationItem.rightBarButtonItem?.isEnabled = false
@@ -258,6 +275,24 @@ class AddContactTableViewController: UITableViewController {
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
+    
+    
+    @IBAction func unwindSegueForDoneButton(_ sender: UIBarButtonItem) {
+        if addContactSegue! {
+            performSegue(withIdentifier: doneSegue.name, sender: self)
+        } else {
+            performSegue(withIdentifier: editDoneSegue.name, sender: self)
+        }
+    }
+    
+    @IBAction func unwindSegueForCancelButton(_ sender: UIBarButtonItem) {
+        if addContactSegue! {
+            performSegue(withIdentifier: cancelSegue.name, sender: self)
+        } else {
+            performSegue(withIdentifier: editCancelSegue.name, sender: self)
+        }
+    }
+    
     
     @IBAction func handlePhoneTypeCancelButtonAction(segue: UIStoryboardSegue) {
         
@@ -284,11 +319,11 @@ class AddContactTableViewController: UITableViewController {
         }
         
         switch identifier {
-        case doneSegue.name:
+        case doneSegue.name, editDoneSegue.name:
             collectAllNumbers()
             view.endEditing(true)
             contact = Contact(firstName: firstName, lastName: lastName, numbers: phoneNumbers!)
-        case cancelSegue.name:
+        case cancelSegue.name, editCancelSegue.name:
             view.endEditing(true)
         case selectPhoneTypeSegue.name:
             if let navigationController = segue.destination as? UINavigationController {

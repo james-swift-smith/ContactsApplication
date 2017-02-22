@@ -2,7 +2,7 @@
 //  Number.swift
 //  Contacts
 //
-//  Created by Taras Motyl on 2/6/17.
+//  Created by James Smith on 2/6/17.
 //  Copyright © 2017 James Smith. All rights reserved.
 //
 

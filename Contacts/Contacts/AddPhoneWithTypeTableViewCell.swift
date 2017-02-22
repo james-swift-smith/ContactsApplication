@@ -2,7 +2,7 @@
 //  AddPhoneWithTypeTableViewCell.swift
 //  Contacts
 //
-//  Created by Taras Motyl on 2/19/17.
+//  Created by James Smith on 2/19/17.
 //  Copyright © 2017 James Smith. All rights reserved.
 //
 
@@ -27,7 +27,7 @@ class AddPhoneWithTypeTableViewCell: UITableViewCell {
     }
 
     @IBAction func phoneNumberTextFieldEditingDidChanged(_ sender: AnyObject) {
-        addContactTableViewControllerDelegate?.handleDoneButtonState(textFiled: (phoneNumberTextField?.text?.isEmpty)!)
+        addContactTableViewControllerDelegate?.watchOverAllTextFields()
         addContactTableViewControllerDelegate?.phoneNumber = (phoneNumberTextField?.text)!
     }
     
@@ -57,5 +57,9 @@ class AddPhoneWithTypeTableViewCell: UITableViewCell {
             return nil
         }
         return Number(numberString: phoneNumberTextField.text, numberType: NumberType(rawValue: phoneTypeButton.currentTitle!)!)
+    }
+    
+    func registerTextField() {
+        addContactTableViewControllerDelegate?.textFields?.append(phoneNumberTextField!)
     }
 }

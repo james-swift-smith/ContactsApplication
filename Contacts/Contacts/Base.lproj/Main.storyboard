@@ -143,7 +143,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             <connections>
-                                                <action selector="customTextFiledEditingChanged:" destination="DMz-Qe-Qyt" eventType="editingChanged" id="vca-zd-rwK"/>
+                                                <action selector="customTextFiledEditingChanged:" destination="DMz-Qe-Qyt" eventType="editingChanged" id="TL7-kJ-CWj"/>
                                             </connections>
                                         </textField>
                                     </subviews>
@@ -175,7 +175,7 @@
                                                         <segue destination="xrj-yd-ohS" kind="presentation" identifier="SelectPhoneType" id="if3-Gk-INC"/>
                                                     </connections>
                                                 </button>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="srJ-J8-Krp">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" textAlignment="natural" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="srJ-J8-Krp">
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -229,15 +229,21 @@
                     <navigationItem key="navigationItem" title="Add Contact" id="bJB-VV-LvN">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="It4-wZ-jo2">
                             <connections>
-                                <segue destination="TTO-Mb-mb4" kind="unwind" identifier="HandleAddContactCancelButton" unwindAction="handleAddContactCancelButtonActionWithSegue:" id="B65-tT-ILL"/>
+                                <action selector="unwindSegueForCancelButton:" destination="xyW-7M-Pkl" id="oM9-5r-16d"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="KXX-H9-TZg">
                             <connections>
-                                <segue destination="TTO-Mb-mb4" kind="unwind" identifier="HandleAddContactDoneButton" unwindAction="handleAddContactDoneButtonActionWithSegue:" id="aig-MW-e6w"/>
+                                <action selector="unwindSegueForDoneButton:" destination="xyW-7M-Pkl" id="NcX-b6-VDA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="TTO-Mb-mb4" kind="unwind" identifier="HandleEditContactDoneButtonActionSegue" unwindAction="handleEditContactDoneButtonActionWithSegue:" id="w8I-N8-0Wg"/>
+                        <segue destination="TTO-Mb-mb4" kind="unwind" identifier="HandleEditContactCancelButtonActionSegue" unwindAction="handleEditContactCancelButtonActionWithSegue:" id="dEl-XR-bon"/>
+                        <segue destination="TTO-Mb-mb4" kind="unwind" identifier="HandleAddContactCancelButton" unwindAction="handleAddContactCancelButtonActionWithSegue:" id="R7G-Ag-5mX"/>
+                        <segue destination="TTO-Mb-mb4" kind="unwind" identifier="HandleAddContactDoneButton" unwindAction="handleAddContactDoneButtonActionWithSegue:" id="9wD-qq-DSm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H81-l2-auz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="TTO-Mb-mb4" userLabel="Exit" sceneMemberID="exit"/>

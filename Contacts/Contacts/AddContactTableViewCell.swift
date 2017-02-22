@@ -10,7 +10,7 @@ import UIKit
 
 class AddContactTableViewCell: UITableViewCell {    
     @IBOutlet weak var customTextField: UITextField?
-    var addContactTableDelegate: AddContactTableViewController?
+    var addContactTableViewControllerDelegate: AddContactTableViewController?
     var isFirstNameFiled: Bool?
     
     override func awakeFromNib() {
@@ -21,17 +21,29 @@ class AddContactTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    @IBAction func customTextFiledEditingChanged(_ sender: AnyObject) {
-        addContactTableDelegate?.handleDoneButtonState(textFiled: (customTextField?.text?.isEmpty)!)
-        
-        if isFirstNameFiled! == true {
-            addContactTableDelegate?.firstName = (customTextField?.text)!
+    
+    @IBAction func customTextFiledEditingChanged(_ sender: UITextField) {
+        addContactTableViewControllerDelegate?.watchOverAllTextFields()
+        if !(customTextField?.text?.isEmpty)! {
+            if isFirstNameFiled! == true {
+                addContactTableViewControllerDelegate?.firstName = (customTextField?.text)!
+            } else {
+                addContactTableViewControllerDelegate?.lastName = (customTextField?.text)!
+            }
         } else {
-            addContactTableDelegate?.lastName = (customTextField?.text)!
+            if isFirstNameFiled! == true {
+                addContactTableViewControllerDelegate?.firstName = nil
+            } else {
+                addContactTableViewControllerDelegate?.lastName = nil
+            }
         }
     }
     
     func setCustomTextFieldText(text: String) {
         customTextField?.text = text
+    }
+    
+    func registerTextField() {
+        addContactTableViewControllerDelegate?.textFields?.append(customTextField!)
     }
 }

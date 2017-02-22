@@ -18,7 +18,7 @@ class ContactDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        personalInfo = [String]()
+        //personalInfo = [String]()
         configureSection()
     }
 
@@ -58,7 +58,7 @@ class ContactDetailsTableViewController: UITableViewController {
     
     func configureSection() {
         sections = [Section]()
-        
+        personalInfo = [String]()
         if let firstName = contact.firstName {
             personalInfo.append(firstName)
         }
@@ -95,11 +95,27 @@ class ContactDetailsTableViewController: UITableViewController {
                 if let addContactTableViewController = navigationController.topViewController as? AddContactTableViewController {
                     addContactTableViewController.addContactSegue = false
                     addContactTableViewController.contact = contact
+                    addContactTableViewController.navigationItem.title = "Edit Contact"
                 }
             }
         default:
             break
         }
 
+    }
+    
+    @IBAction func handleEditContactCancelButtonAction(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func handleEditContactDoneButtonAction(segue: UIStoryboardSegue) {
+        if let editContactViewController = segue.source as? AddContactTableViewController {
+            if let editedContact = editContactViewController.contact{
+                contact = editedContact
+                configureSection()
+                tableView.reloadData()
+            }
+        }
+        
     }
 }
