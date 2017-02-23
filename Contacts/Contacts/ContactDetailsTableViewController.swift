@@ -11,6 +11,7 @@ import UIKit
 class ContactDetailsTableViewController: UITableViewController {
 
     var contact: Contact!
+    var contactIndex: Int?
     var personalInfo: [String]!
     var sections: [Section]!
     
@@ -18,7 +19,6 @@ class ContactDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //personalInfo = [String]()
         configureSection()
     }
 
@@ -114,6 +114,7 @@ class ContactDetailsTableViewController: UITableViewController {
                 contact = editedContact
                 configureSection()
                 tableView.reloadData()
+                Database.sharedInstance.updateContact(with: contact, atIndex: contactIndex!)
             }
         }
         

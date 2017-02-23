@@ -47,3 +47,9 @@ extension Number: CustomStringConvertible {
         return numberString!
     }
 }
+
+extension Number: Equatable {
+    static func == (lhs: Number, rhs: Number) -> Bool {
+        return (lhs.numberString == rhs.numberString) && (lhs.numberType == rhs.numberType)
+    }
+}

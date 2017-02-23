@@ -20,7 +20,7 @@ class Database {
          ("Maxime", "Defauw", "0088246801"),
          ("Ray", "Wenderlich", "0032114527"),
          ("Violette", "Le Roy", "0052562283"),
-         ("", "Bentham", "0088778467"),
+         ("John", "Bentham", "0088778467"),
          ("Sebastian", "Bommer", "0043978786"),
          ("Charlotte", "Sky", "0052123444"),
          ("Thomas", "Valette", "0088946733"),
@@ -45,6 +45,17 @@ class Database {
          ("Efren", "Earle", "0089647390") ].map {
             (firstName, lastName, numberString) -> Contact in
             return Contact(firstName: firstName, lastName: lastName, number: Number(numberString: numberString)!)
+    }
+    
+    func updateContact(with contact: Contact, atIndex index: Int) {
+        if index >= 0 && index <= contacts.count {
+            contacts[index] = contact
+        }
+        sortContacts()
+    }
+    
+    func sortContacts() {
+        contacts.sort(by: <)
     }
 }
 

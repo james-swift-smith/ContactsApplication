@@ -204,7 +204,7 @@ class AddContactTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Table view editing configuration
+    // MARK: - Table view editing configuration
 
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if indexPath.section == 0 {
@@ -241,7 +241,7 @@ class AddContactTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Table view helper methods
+    // MARK: - Table view helper methods
     
     func collectAllNumbers() {
         for row in 0..<sections[1].rows - 1 {
@@ -253,12 +253,9 @@ class AddContactTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     func watchOverAllTextFields() {
-        print("in watchOverAllTextFields")
-        print("textfields count: \(textFields?.count)")
-        
         var allEmpty = true
         for textField in textFields! {
             if !(textField.text?.isEmpty)! {

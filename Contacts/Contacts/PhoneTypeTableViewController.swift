@@ -21,8 +21,7 @@ class PhoneTypeTableViewController: UITableViewController {
         }
     }
     
-    let selectPhoneTypeSegue = SegueInfo(name: "SelectPhoneType")
-    let doneButtonActionSegue = SegueInfo(name: "HandleAddContactDoneButton")
+    let doneButtonActionSegue = SegueInfo(name: "HandlePhoneTypeDoneButtonSegue")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,5 +79,6 @@ class PhoneTypeTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: doneButtonActionSegue.name, sender: self)
     }
 }

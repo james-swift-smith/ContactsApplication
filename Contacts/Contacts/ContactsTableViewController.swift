@@ -13,6 +13,52 @@ class ContactsTableViewController: UITableViewController {
     var contactDetailsSegue = SegueInfo(name: "ShowContactDetailsSegue")
     var addContactSegue = SegueInfo(name: "AddContactSegue")
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Database.sharedInstance.sortContacts()
+        tableView.reloadData()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Database.sharedInstance.contacts.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
+
+        let contact = Database.sharedInstance.contacts[indexPath.row]
+        cell.contact = contact
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            Database.sharedInstance.contacts.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
+    // MARK: - Navigation  
+    
     @IBAction func handleAddContactCancelButtonAction(segue: UIStoryboardSegue) {
         
     }
@@ -26,64 +72,9 @@ class ContactsTableViewController: UITableViewController {
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
         }
-
+        
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return Database.sharedInstance.contacts.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
-
-        let contact = Database.sharedInstance.contacts[indexPath.row]
-        cell.contact = contact
-        return cell
-    }
-    
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            Database.sharedInstance.contacts.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
             return
@@ -94,6 +85,7 @@ class ContactsTableViewController: UITableViewController {
             let contactTableViewCell = sender as! ContactTableViewCell
             let contactDetailsViewController = segue.destination as! ContactDetailsTableViewController
             contactDetailsViewController.contact = contactTableViewCell.contact
+            contactDetailsViewController.contactIndex = (tableView.indexPath(for: contactTableViewCell)?.row)!
         case addContactSegue.name:
             if let navigationController = segue.destination as? UINavigationController {
                 if let addContactTableViewController = navigationController.topViewController as? AddContactTableViewController {
