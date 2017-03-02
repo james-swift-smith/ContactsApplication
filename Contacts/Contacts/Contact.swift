@@ -64,71 +64,39 @@ extension Contact: CustomStringConvertible {
     }
 }
 
-extension Contact: Comparable {
-    static func < (lhs: Contact, rhs: Contact) -> Bool {
-        if let lhsFirstnName = lhs.firstName {
-            if let rhsFirstName = rhs.firstName {
-                return lhsFirstnName < rhsFirstName
-            } else {
-                if let rhsLastName = rhs.lastName {
-                    return lhsFirstnName < rhsLastName
-                } else {
-                    return lhs.numbers[0].numberString! < rhs.numbers[0].numberString!
-                }
-            }
-        } else {
-            if let lhsLastName = lhs.lastName {
-                if let rhsFirstName = rhs.firstName {
-                    return lhsLastName < rhsFirstName
-                } else {
-                    if let rhsLastName = rhs.lastName {
-                        return lhsLastName < rhsLastName
-                    } else {
-                        return lhs.numbers[0].numberString! < rhs.numbers[0].numberString!
-                    }
-                }
-            } else {
-                return lhs.numbers[0].numberString! < rhs.numbers[0].numberString!
+extension Contact: Hashable {
+    var hashValue: Int {
+        var hash = 0
+        if let fristNameHasValue = firstName?.hashValue {
+            hash = hash ^ fristNameHasValue
+        }
+        if let lastNameHashValue = lastName?.hashValue {
+            hash = hash ^ lastNameHashValue
+        }
+        if !(numbers.isEmpty) {
+            for number in numbers {
+                hash = hash ^ number.hashValue
             }
         }
+        return hash
+    }
+}
+
+extension Contact: Comparable {
+    static func < (lhs: Contact, rhs: Contact) -> Bool {        
+        if let lhsFirstName = lhs.firstName, let rhsFirstName = rhs.firstName {
+            return lhsFirstName < rhsFirstName
+        }
+        if let lhsLastName = lhs.lastName, let rhsLastName = rhs.lastName {
+            return lhsLastName < rhsLastName
+        }
+        if let lhsNumber = lhs.numbers[0].numberString, let rhsNumber = rhs.numbers[0].numberString {
+            return lhsNumber < rhsNumber
+        }
+        return false
     }
     
     static func == (lhs: Contact, rhs: Contact) -> Bool {
-        var equal = false        
-        
-        if let lhsFirstName = lhs.firstName {
-            if let rhsFirstName = rhs.firstName {
-                if lhsFirstName == rhsFirstName {
-                    equal = true
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
-        }
-        if let lhsLastName = lhs.lastName {
-            if let rhsLastName = rhs.lastName {
-                if lhsLastName == rhsLastName {
-                    equal = true
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
-        }
-        if lhs.numbers.count == rhs.numbers.count {
-            for i in 0 ..< lhs.numbers.count {
-                if lhs.numbers[i] == rhs.numbers[i] {
-                    equal = true
-                } else {
-                    return false
-                }
-            }
-        } else {
-            return false
-        }
-        return equal
+        return lhs.hashValue == rhs.hashValue
     }
 }

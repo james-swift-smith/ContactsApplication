@@ -17,9 +17,9 @@
 		0C7854AD1E49C5CF002C47BC /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854AC1E49C5CF002C47BC /* Database.swift */; };
 		0C7854AF1E49D1C3002C47BC /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */; };
 		0C7854B11E49D238002C47BC /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */; };
-		0C7854B71E4A197D002C47BC /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */; };
 		0C8C39C51E5A2DA000EC342F /* AddPhoneWithTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C39C41E5A2DA000EC342F /* AddPhoneWithTypeTableViewCell.swift */; };
 		0C8C39C71E5B078200EC342F /* PhoneTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C39C61E5B078200EC342F /* PhoneTypeTableViewController.swift */; };
+		0C8C39CE1E5B7D1400EC342F /* ContactDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C39CD1E5B7D1400EC342F /* ContactDetailsTableViewController.swift */; };
 		0C9DDB4C1E55E5B7004C7B12 /* AddContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DDB4B1E55E5B7004C7B12 /* AddContactTableViewController.swift */; };
 		0C9DDB501E55EFB1004C7B12 /* AddContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DDB4F1E55EFB1004C7B12 /* AddContactTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -37,9 +37,9 @@
 		0C7854AC1E49C5CF002C47BC /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
-		0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
 		0C8C39C41E5A2DA000EC342F /* AddPhoneWithTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhoneWithTypeTableViewCell.swift; sourceTree = "<group>"; };
 		0C8C39C61E5B078200EC342F /* PhoneTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneTypeTableViewController.swift; sourceTree = "<group>"; };
+		0C8C39CD1E5B7D1400EC342F /* ContactDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailsTableViewController.swift; sourceTree = "<group>"; };
 		0C9DDB4B1E55E5B7004C7B12 /* AddContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactTableViewController.swift; sourceTree = "<group>"; };
 		0C9DDB4F1E55EFB1004C7B12 /* AddContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,24 +74,56 @@
 		0C7854951E48FE7D002C47BC /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				0C7854961E48FE7D002C47BC /* AppDelegate.swift */,
 				0C78549D1E48FE7D002C47BC /* Assets.xcassets */,
+				0C8C39C81E5B7B9000EC342F /* AddContactScene */,
+				0C8C39CA1E5B7BF000EC342F /* Core */,
+				0C8C39CC1E5B7C1300EC342F /* ContactDetailsScene */,
+				0C8C39C91E5B7BD000EC342F /* ContactsScene */,
+				0C7854961E48FE7D002C47BC /* AppDelegate.swift */,
 				0C7854A21E48FE7D002C47BC /* Info.plist */,
 				0C78549F1E48FE7D002C47BC /* LaunchScreen.storyboard */,
 				0C78549A1E48FE7D002C47BC /* Main.storyboard */,
 				0C7854981E48FE7D002C47BC /* ViewController.swift */,
-				0C7854A81E490395002C47BC /* Contact.swift */,
-				0C7854AA1E49044F002C47BC /* Number.swift */,
-				0C7854AC1E49C5CF002C47BC /* Database.swift */,
-				0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */,
-				0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */,
-				0C7854B61E4A197D002C47BC /* ContactDetailsViewController.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		0C8C39C81E5B7B9000EC342F /* AddContactScene */ = {
+			isa = PBXGroup;
+			children = (
 				0C9DDB4B1E55E5B7004C7B12 /* AddContactTableViewController.swift */,
 				0C9DDB4F1E55EFB1004C7B12 /* AddContactTableViewCell.swift */,
 				0C8C39C41E5A2DA000EC342F /* AddPhoneWithTypeTableViewCell.swift */,
 				0C8C39C61E5B078200EC342F /* PhoneTypeTableViewController.swift */,
 			);
-			path = Contacts;
+			name = AddContactScene;
+			sourceTree = "<group>";
+		};
+		0C8C39C91E5B7BD000EC342F /* ContactsScene */ = {
+			isa = PBXGroup;
+			children = (
+				0C7854AE1E49D1C3002C47BC /* ContactsTableViewController.swift */,
+				0C7854B01E49D238002C47BC /* ContactTableViewCell.swift */,
+			);
+			name = ContactsScene;
+			sourceTree = "<group>";
+		};
+		0C8C39CA1E5B7BF000EC342F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0C7854A81E490395002C47BC /* Contact.swift */,
+				0C7854AA1E49044F002C47BC /* Number.swift */,
+				0C7854AC1E49C5CF002C47BC /* Database.swift */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		0C8C39CC1E5B7C1300EC342F /* ContactDetailsScene */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C39CD1E5B7D1400EC342F /* ContactDetailsTableViewController.swift */,
+			);
+			name = ContactDetailsScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,11 +203,11 @@
 				0C7854A91E490395002C47BC /* Contact.swift in Sources */,
 				0C7854AF1E49D1C3002C47BC /* ContactsTableViewController.swift in Sources */,
 				0C8C39C71E5B078200EC342F /* PhoneTypeTableViewController.swift in Sources */,
+				0C8C39CE1E5B7D1400EC342F /* ContactDetailsTableViewController.swift in Sources */,
 				0C7854991E48FE7D002C47BC /* ViewController.swift in Sources */,
 				0C7854B11E49D238002C47BC /* ContactTableViewCell.swift in Sources */,
 				0C7854AD1E49C5CF002C47BC /* Database.swift in Sources */,
 				0C8C39C51E5A2DA000EC342F /* AddPhoneWithTypeTableViewCell.swift in Sources */,
-				0C7854B71E4A197D002C47BC /* ContactDetailsViewController.swift in Sources */,
 				0C7854971E48FE7D002C47BC /* AppDelegate.swift in Sources */,
 				0C9DDB4C1E55E5B7004C7B12 /* AddContactTableViewController.swift in Sources */,
 			);

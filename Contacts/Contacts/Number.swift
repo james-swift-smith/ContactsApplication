@@ -29,7 +29,7 @@ enum NumberType: String {
     }
 }
 
-class Number {
+struct Number {
     var numberString: String?
     var numberType: NumberType
     
@@ -51,5 +51,11 @@ extension Number: CustomStringConvertible {
 extension Number: Equatable {
     static func == (lhs: Number, rhs: Number) -> Bool {
         return (lhs.numberString == rhs.numberString) && (lhs.numberType == rhs.numberType)
+    }
+}
+
+extension Number: Hashable {
+    var hashValue: Int {
+        return (numberString?.hashValue)! ^ numberType.hashValue
     }
 }
